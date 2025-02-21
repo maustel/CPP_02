@@ -12,9 +12,32 @@
 
 #include "Fixed.hpp"
 
+//--------()()()()()()------ [CONSTRUCTORS AND DESTRUCTOR] ------()()()()()()------
+
 Fixed::Fixed(): _fp_value(0)
 {
 	std::cout << "Default constructor called." << std::endl;
+}
+
+/*-----------------------------------------------------------
+Int constructor that takes a constant integer as a parameter.
+It converts it to the corresponding fixed-point value.
+x = floating_input * 2^(fractional_bits)
+------------------------------------------------------------*/
+Fixed::Fixed(const int nbr)
+{
+	this->_fp_value = nbr * (1 << this->_fract_bits);
+	std::cout << "Int constructor called." << std::endl;
+}
+
+/*
+constructor that takes a constant floating-point number as a parameter.
+It converts it to the corresponding fixed-point value.
+ */
+Fixed::Fixed(const float nbr)
+{
+	this->_fp_value = roundf(nbr * (1 << this->_fract_bits));
+	std::cout << "Float constructor called." << std::endl;
 }
 
 Fixed::~Fixed()
@@ -39,9 +62,9 @@ Fixed::Fixed(const Fixed &other): _fp_value(other._fp_value)
 Copy assignment operator
 Copies values into an existing object
 In case of a = b, in the method (this) refers to left operand (a), while
-	the parameter taken is (b).
+the parameter taken is (b).
 The return value of the function, as in the function about operator<<,
-	is needed only for chaining it with other oprands like a = b = c.
+is needed only for chaining it with other oprands like a = b = c.
 -------------------------------------------------------------------*/
 Fixed &Fixed::operator=(const Fixed &other)
 {
@@ -49,6 +72,8 @@ Fixed &Fixed::operator=(const Fixed &other)
 	this->_fp_value = other._fp_value;
 	return (*this);
 }
+
+//--------()()()()()()-------- [MEMBER FUNCTIONS] ---------()()()()()()-------
 
 /*------------------------------------------------------------------
 returns the raw value of the fixed-point value
@@ -66,4 +91,33 @@ void Fixed::setRawBits(int const raw )
 {
 	std::cout << "setRawBits member function called." << std::endl;
 	this->_fp_value = raw;
+}
+
+/*------------------------------------------------------------------
+converts the fixed-point value to a floating-point value
+We take the input value and divide it by (2^fractional_bits)
+-------------------------------------------------------------------*/
+float Fixed::toFloat() const
+{
+	return ((float)this->_fp_value / (1 << this->_fract_bits));
+}
+
+/*------------------------------------------------------------------
+converts the fixed-point value to an integer value
+-------------------------------------------------------------------*/
+int Fixed::toInt() const
+{
+	return (this->_fp_value / (1 << this->_fract_bits));
+}
+
+//-------()()()()()()------- [EXTERNAL FUNCTIONS] --------()()()()()()--------
+
+/*------------------------------------------------------------------
+An overload of the insertion («) operator that inserts a floating-point representation
+of the fixed-point number into the output stream object passed as parameter
+------------------------------------------------------------------*/
+std::ostream& operator<<(std::ostream &o, const Fixed& obj)
+{
+	o << obj.toFloat();
+	return (o);
 }
