@@ -50,12 +50,14 @@ Copy constructor -> Fixed b( a );
 Creates a new object(b) as a copy of an existing one (a)
 copies _fp_value from existing class (should copy all non const values)
 does not copy _fract_bits because its constant
+*this = other; ->calls copy assignment operator
 could be also done like this:
-*this = other;
+Fixed::Fixed(const Fixed &other): _fp_value(other._fp_value){}
 -------------------------------------------------------------------*/
-Fixed::Fixed(const Fixed &other): _fp_value(other._fp_value)
+Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called." << std::endl;
+	*this = other;
 }
 
 /*------------------------------------------------------------------
