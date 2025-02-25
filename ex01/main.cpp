@@ -18,13 +18,18 @@ main function is given from the subject
 A fixed-point number is a way to represent decimal numbers using integers by
 assuming a fixed number of decimal places. For example, 1.23 can be stored as
 the integer 123 with 2 decimal places.
+in our case it will be shifted 8 bytes to the left (x * 256)
+so we can store also the numbers on the right hand side of the decimal point
+to re-transform we do x / 256
 
-Key points:
+Key points about fixed point:
     It's like having a decimal point in a fixed position
     Faster than floating-point numbers because it uses integer arithmetic
     Commonly used in games and digital signal processing
     Limited range and precision compared to floating-point
-    Works well for specific applications like money calculations where exact precision is needed
+
+Since we have a default, int and float constructor, the program chooses
+automatically depending on the parameter, which constructor to use
 ---------------------------------------------------------------------*/
 int main()
 {
@@ -43,5 +48,6 @@ int main()
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
-	std::cout << "d is " << d.getRawBits() << " in raw bits" << std::endl;
+	std::cout << "d is " << d.getRawBits() << " as raw bits" << std::endl; //not from subject
+	std::cout << "b is " << b.toFloat() << " as float" << std::endl;
 }

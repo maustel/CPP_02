@@ -33,6 +33,7 @@ Fixed::Fixed(const int nbr)
 /*
 constructor that takes a constant floating-point number as a parameter.
 It converts it to the corresponding fixed-point value.
+roundf handles any fractional parts by rounding to the nearest integer value
  */
 Fixed::Fixed(const float nbr)
 {
