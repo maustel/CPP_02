@@ -20,6 +20,12 @@ objects. For example a and b are not numbers but objects. In the functions
 with operator overload, I can do the operation on the attributes of the object
 I decide. Or do anything else.
 
+Non-const references (Fixed&) can only bind to non-temporary non-const objects.
+Const references (const Fixed&) can bind to anything: const objects, non-const
+objects, and temporaries.
+
+static: clearly communicates that max is a utility function rather than an operation on a specific object
+It provides the syntax: Fixed::max(a, b) instead of a.max(a, b)
 ---------------------------------------------------------------------*/
 int main()
 {
@@ -32,6 +38,7 @@ int main()
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
-	// std::cout << Fixed::max( a, b ) << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
+	std::cout << Fixed::max( Fixed (9.3f), Fixed (1.2f) ) << std::endl;
 	return 0;
 }

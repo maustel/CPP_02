@@ -115,32 +115,32 @@ int Fixed::toInt() const
 
 //-----()()()()()---- [COMPARISON OPERATOR FUNCTIONS] -----()()()()()-----
 
-bool Fixed::operator>(const Fixed &rhs)
+bool Fixed::operator>(const Fixed &rhs) const
 {
 	return (this->_fp_value > rhs._fp_value);
 }
 
-bool Fixed::operator<(const Fixed &rhs)
+bool Fixed::operator<(const Fixed &rhs) const
 {
 	return (this->_fp_value < rhs._fp_value);
 }
 
-bool Fixed::operator>=(const Fixed &rhs)
+bool Fixed::operator>=(const Fixed &rhs) const
 {
 	return (this->_fp_value >= rhs._fp_value);
 }
 
-bool Fixed::operator<=(const Fixed &rhs)
+bool Fixed::operator<=(const Fixed &rhs) const
 {
 	return (this->_fp_value <= rhs._fp_value);
 }
 
-bool Fixed::operator==(const Fixed &rhs)
+bool Fixed::operator==(const Fixed &rhs) const
 {
 	return (this->_fp_value == rhs._fp_value);
 }
 
-bool Fixed::operator!=(const Fixed &rhs)
+bool Fixed::operator!=(const Fixed &rhs) const
 {
 	return (this->_fp_value != rhs._fp_value);
 }
@@ -190,16 +190,57 @@ Fixed& Fixed::operator--(void)
 
 Fixed Fixed::operator++(int)
 {
-	Fixed tmp = *this;
+	Fixed tmp (*this);
 	this->_fp_value++;
 	return (tmp);
 }
 
 Fixed Fixed::operator--(int)
 {
-	Fixed tmp = *this;
+	Fixed tmp (*this);
 	this->_fp_value--;
 	return (tmp);
+}
+
+//-------()()()()()------- [MIN / MAX FUNCTIONS] --------()()()()()--------
+
+/*
+Non-const references (Fixed&) can only bind to non-temporary non-const objects.
+Const references (const Fixed&) can bind to anything: const objects, non-const
+objects, and temporaries.
+static: clearly communicates that max is a utility function rather than an operation on a specific object
+It provides the syntax: Fixed::max(a, b)
+*/
+Fixed& Fixed::min(Fixed &num1, Fixed &num2)
+{
+	if (num1 < num2)
+		return (num1);
+	else
+		return (num2);
+}
+
+const Fixed& Fixed::min(const Fixed &num1, const Fixed &num2)
+{
+	if (num1 < num2)
+		return (num1);
+	else
+		return (num2);
+}
+
+Fixed& Fixed::max(Fixed &num1, Fixed &num2)
+{
+	if (num1 > num2)
+		return (num1);
+	else
+		return (num2);
+}
+
+const Fixed& Fixed::max(const Fixed &num1, const Fixed &num2)
+{
+	if (num1 > num2)
+		return (num1);
+	else
+		return (num2);
 }
 
 //-------()()()()()------- [EXTERNAL FUNCTIONS] --------()()()()()--------
