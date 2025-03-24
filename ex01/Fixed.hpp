@@ -26,9 +26,10 @@ class Fixed
 	Fixed();
 	~Fixed();
 	Fixed(const int val);	//int constructor
-	Fixed(const float nbr);
+	Fixed(const float nbr);	//float constructor
 	Fixed(const Fixed& other);	//copy constructor
 	Fixed& operator=(const Fixed& other);	//copy assignment operator
+	
 	int getRawBits( void ) const;
 	void setRawBits( int const raw );
 	float toFloat( void ) const;

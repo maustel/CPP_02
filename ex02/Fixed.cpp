@@ -210,6 +210,10 @@ Const references (const Fixed&) can bind to anything: const objects, non-const
 objects, and temporaries.
 static: clearly communicates that max is a utility function rather than an operation on a specific object
 It provides the syntax: Fixed::max(a, b)
+
+Static member functions don't have a this pointer because they belong to the class itself, not to any instance
+Without an object to protect, the const qualifier has no meaning for static functions
+-> static Fixed& min(Fixed& num1, Fixed& num2) const; --> const in the end would not make sense
 */
 Fixed& Fixed::min(Fixed &num1, Fixed &num2)
 {

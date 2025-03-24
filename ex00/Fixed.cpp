@@ -56,6 +56,7 @@ returns the raw value of the fixed-point value
 int Fixed::getRawBits() const
 {
 	std::cout << "getRawBits member function called." << std::endl;
+	(void) _fract_bits;
 	return (this->_fp_value);
 }
 

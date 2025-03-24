@@ -30,6 +30,12 @@ Key points about fixed point:
 
 Since we have a default, int and float constructor, the program chooses
 automatically depending on the parameter, which constructor to use
+
+Clean numbers like 10.0 maintain exact precision throughout
+Complex numbers like 1234.4321 accumulate small rounding errors
+Intermediate values like 42.42 show slight variations due to binary representation limitations
+This behavior is normal and expected in fixed-point arithmetic systems, where the trade-off between
+precision and integer-based calculations leads to these small rounding effects.
 ---------------------------------------------------------------------*/
 int main()
 {

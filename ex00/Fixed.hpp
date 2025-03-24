@@ -22,10 +22,13 @@ class Fixed
 	const int _fract_bits = 8;
 
 	public:
+	//-------------------------------------canonical
 	Fixed();
 	~Fixed();
 	Fixed(const Fixed& other);	//copy constructor
 	Fixed& operator=(const Fixed& other);	//copy assignment operator
+
+	//-------------------------------------member functions
 	int getRawBits( void ) const;
 	void setRawBits( int const raw );
 };
